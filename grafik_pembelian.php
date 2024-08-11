@@ -40,12 +40,12 @@
 					$med=0;
 					$max=0;
 					$no=0;
-					$query_data=mysqli_query($conn,"select * from pembelian_header where (tanggal BETWEEN '$tgl1' AND '$tgl2') group by tanggal order by tanggal asc");
+					$query_data=mysqli_query($conn,"select * from penjualan_header where (tanggal BETWEEN '$tgl1' AND '$tgl2') group by tanggal order by tanggal asc");
 					while ($data=mysqli_fetch_array($query_data)){
 						$no++;
 						$tgl[$no]=$data["tanggal"];
 						$qty[$no]=0;
-						$query_total=mysqli_query($conn,"select * from pembelian_detail join pembelian_header on pembelian_detail.nota_pembelian=pembelian_header.nota_pembelian where pembelian_header.tanggal='".$tgl[$no]."'");
+						$query_total=mysqli_query($conn,"select * from penjualan_detail join penjualan_header on penjualan_detail.nota_penjualan=penjualan_header.nota_penjualan where penjualan_header.tanggal='".$tgl[$no]."'");
 						while($data_total=mysqli_fetch_array($query_total)){
 							$qty[$no]=$qty[$no]+$data_total["qty"];
 						}
@@ -97,9 +97,9 @@
 								<td rowspan="3" bgcolor="black"></td>
 								<?php
 								for ($a=1;$a<=$no; $a++){ ?>
-									<td rowspan="3" width="80px" height="100" align="center" valign="bottom">									
+									<td rowspan="3" width="80px" height="100" align="center" valign="bottom">
 									<?php if($a%2==0){ ?>
-										<img src="assets/img/grafik_pembelian.jpg" width="80%" height="<?php echo number_format($persen[$a],0)."%"; ?>"/>
+										<img src="assets/img/grafik_penjualan.jpg" width="80%" height="<?php echo number_format($persen[$a],0)."%"; ?>"/>
 									<?php }else{?>
 										<img src="assets/img/grafik.jpg" width="80%" height="<?php echo number_format($persen[$a],0)."%"; ?>"/>
 									<?php }?>
